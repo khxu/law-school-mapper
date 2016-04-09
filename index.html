@@ -360,6 +360,7 @@
 							 }
 						 } )
 						 .attr("class", "law-school-circles")
+						 .attr("shrunk", "no")
 						 .on("mouseover", mouseover_lawschool)
 					   .on("mousemove", mousemove_lawschool)
 					   .on("mouseout", mouseout_lawschool)
@@ -372,7 +373,7 @@
 						 .style("stroke", "rgb(255,255,255)")
 						 .style("stroke-width", 0.5)
 						 .style("opacity", 0.6)
-						 .on("click", shrink);
+						 .on("click", resize);
 				})
 
 				// Bind data and create one path per GeoJSON feature
@@ -426,8 +427,21 @@
 				};
 			};
 
-			function shrink(d) {
-				d3.select(this).transition().style("r", 1);
+			function resize(d) {
+				if (d3.select(this).attr("shrunk") == "no") {
+					d3.select(this).transition().style("r", 1);
+					d3.select(this).attr("shrunk", "yes");
+				} else {
+					d3.select(this).transition().style("r", function(d) {
+						if (d._2011_enrollment == "Data Unavailable") {
+							return 2;
+						} else {
+							return d._2011_enrollment * 0.01;
+						}
+					});
+					d3.select(this).attr("shrunk", "no");
+				}
+
 			}
 
 			function mouseover() {
