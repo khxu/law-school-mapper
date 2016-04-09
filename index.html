@@ -371,7 +371,7 @@
 										 }})
 						 .style("stroke", "rgb(255,255,255)")
 						 .style("stroke-width", 0.5)
-						 .style("opacity", 0.5)
+						 .style("opacity", 0.6)
 						 .on("click", shrink);
 				})
 
@@ -436,6 +436,8 @@
 
 			function mouseover_lawschool() {
 			  lawschooldiv.style("display", "inline");
+				d3.select(this)
+					.style("stroke-width", 2);
 			}
 
 			function mousemove(d) {
@@ -464,7 +466,9 @@
 			}
 
 			function mouseout_lawschool() {
-			  lawschooldiv.style("display", "none");
+			  lawschooldiv.style("display", "none")
+				d3.select(this)
+					.style("stroke-width", 0.5);
 			}
 
 			function clicked(d) {
