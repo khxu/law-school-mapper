@@ -35,24 +35,71 @@
           <iframe sandbox="allow-scripts allow-forms allow-same-origin" src="/law-school-mapper.html" width="960" height="600" marginwidth="0" marginheight="0" scrolling="no"></iframe>
           <p class="captions">Sources: <a href="https://data.crunchbase.com/page/crunchbase-open-data-map-odm" target="_blank">Crunchbase Open Data Map (December 2015)</a>, <a href="http://eric.clst.org/Stuff/USGeoJSON" target="_blank">Eric Celeste's GeoJSON Data (US Counties)</a>, <a href="http://employmentsummary.abaquestionnaire.org/" target="_blank">ABA Employment Summary Reports (2010-2014)</a>  and, of course, <a href="https://en.wikipedia.org/wiki/List_of_law_schools_in_the_United_States" target="_blank">Wikipedia</a>.</p>
           <p>
-            Each circle in the above map represents a US law school. Circle radii are scaled based on graduating class size in the selected year. Unfortunately, I couldn't find enrollment data on unaccredited law schools, since they don't report their data to the ABA. So, for the unaccredited law schools, I've left their radii at 2px. US county fill colors are based on the number of Crunchbase company listings in that county.
+            Each circle in the above map represents a US law school. Circle radii are scaled based on graduating class size
+            <sup id="fnref:4.classSize">
+              <a href="#fn:4.classSize" rel="footnote">1</a>
+            </sup> in the selected year. Unfortunately, I couldn't find enrollment data on unaccredited law schools, since they don't report their data to the ABA. So, for the unaccredited law schools, I've left their radii at 2px. US county fill colors are based on the number of Crunchbase company listings in that county.
           </p>
           <p>
             I made this map after chatting with a fellow data viz enthusiast at a <a href="https://bids.berkeley.edu/" target="_blank">BIDS</a> event about additional factors that might be interesting to explore re: the potential relationship between law schools
             <sup id="fnref:4.andAttorneys">
-              <a href="#fn:4.andAttorneys" rel="footnote">1</a>
+              <a href="#fn:4.andAttorneys" rel="footnote">2</a>
             </sup>
-             and startups. My <a href="https://www.kevinhxu.com/startup-mapper.html" target="_blank">Startup Mapper</a> project showed the locations of law schools, but it didn't capture the relative volumes of students that law schools have been churning out over the years. After taking inspiration from other <a href="https://developers.google.com/chart/interactive/docs/gallery/bubblechart#example" target="_blank">interactive</a> <a href="http://www.nytimes.com/interactive/2012/02/13/us/politics/2013-budget-proposal-graphic.html" target="_blank">bubble</a> <a href="http://tipstrategies.com/geography-of-jobs/" target="_blank">charts</a> out there, I decided to give it a shot. 
+             and startups. My <a href="https://www.kevinhxu.com/startup-mapper.html" target="_blank">Startup Mapper</a> project showed the locations of law schools, but it didn't capture the relative volumes of students that law schools have been churning out over the years. After taking inspiration from other <a href="https://developers.google.com/chart/interactive/docs/gallery/bubblechart#example" target="_blank">interactive</a> <a href="http://www.nytimes.com/interactive/2012/02/13/us/politics/2013-budget-proposal-graphic.html" target="_blank">bubble</a> <a href="http://tipstrategies.com/geography-of-jobs/" target="_blank">charts</a> out there, I decided to give it a shot.
+          </p>
+          <h2>Trends and Outliers</h2>
+          <p>
+            Generally, it looks like counties that have more law school graduates also have more startup activity on Crunchbase. No surprise there. Either lawyers help facilitate startup formation, or there's just more overall economic activity that can support lawyers as ancillary service providers.
+          </p>
+          <p>
+            One thing that did stick out to me in exploring this map, though, was the drastic changes in class size that some law schools have undergone in recent years. For example:
+            <ul>
+              <li>
+                Over in Michigan, Cooley Law School went from 1,143 graduates in 2013 to 871 in 2014, a <b>decrease</b> of almost <span class="decrease">25%</span>.
+              </li>
+              <li>
+                In California, the McGeorge School of Law went from 318 graduates in 2013 to 187 in 2014, a <b>decrease</b> of over <span class="decrease">40%</span>.
+              </li>
+              <li>
+                Meanwhile, in Southern California, the University of La Verne, College of Law went from 86 graduates in 2013 to just 44 in 2014, a <b>decrease</b> of almost <span class="decrease">50%</span>.
+              </li>
+              <li>
+                Interestingly, Ave Maria School of Law, in Florida, went from 88 graduates in 2011 to 166 graduates in 2012, an <span class="increase">88%</span> <b>increase</b>. However, by 2014, their graduating class size dipped to 110, which equated to a <span class="decrease">30%</span> <b>decrease</b>.
+              </li>
+            </ul>
+          </p>
+          <p>
+            Additionally, some counties have a relatively high amount of startup activity on Crunchbase despite having fewer law graduates, which might cut against the argument that lawyers help drive business activity. Just take a look at Clark County in Nevada and Maricopa County in Arizona&#8212;they both have a decent number of startup company listings on Crunchbase, but relatively few law graduates coming out of their counties locally. Perhaps those counties are enticing enough
+            <sup id="fnref:4.vegasAndPhoenix">
+              <a href="#fn:4.vegasAndPhoenix" rel="footnote">3</a>
+            </sup> to attract startup legal expertise from other locales. Or there are other factors that encourage startup formation in those counties.<sup id="fnref:4.cnn">
+              <a href="#fn:4.cnn" rel="footnote">4</a>
+            </sup>
           </p>
           <h2>Data Issues</h2>
           <p>
-            The ABA is made up of lawyers, and not statisticians. I get that. But my goodness, cleaning up the data for use in this map was ridiculous. First, the datasets available from the <a href="http://www.americanbar.org/groups/legal_education/resources/statistics.html" target="_blank">ABA Statistics</a> page seem to be in the form of a random mix of PDFs and Excel spreadsheets.
+            The ABA is made up of lawyers, primarily, and not data scientists. I get that. But my goodness, cleaning up the data for use in this map was ridiculous. First, the datasets available from the <a href="http://www.americanbar.org/groups/legal_education/resources/statistics.html" target="_blank">ABA Statistics</a> page are in the format of either a PDF or an Excel spreadsheet. Acrobat's PDF-to-Excel conversion feature is pretty impressive, but why, oh why, would anyone offer the data in <a href="https://flowingdata.com/2014/06/10/how-to-make-government-data-sites-better/" target="_blank">PDF format</a>?
+          </p>
+          <p>
+            Thankfully, the <a href="http://employmentsummary.abaquestionnaire.org/" target="_blank">ABA Employment Summary</a> site is more sensible and provides all of their data as spreadsheets&#8212;and lists the total number of graduates for each year in one of the endless columns way over to the right. Here's to hoping that as the Open Data movement catches on, these kinds of problems will be a thing of the past. Until then, I hear good things about <a href="http://tabula.technology/" target="_blank">Tabula</a> for data trapped in PDFs and <a href="https://www.import.io/" target="_blank">import.io</a> for website data. 
           </p>
           <div class="footnotes">
             <hr>
             <ol>
+              <li id="fn:4.classSize">
+                <p>Note: the datasets provided count graduating part-time and full-time students as part of the graduating class.
+                </p>
+              </li>
               <li id="fn:4.andAttorneys">
                 <p>(and attorneys)
+                </p>
+              </li>
+              <li id="fn:4.vegasAndPhoenix">
+                <p>Vegas and Phoenix are pretty awesome.
+                </p>
+              </li>
+              <li id="fn:4.cnn">
+                <p><a href="http://money.cnn.com/galleries/2012/smallbusiness/1206/gallery.best-places-entrepreneurs/" target="_blank">Some</a> seem to think that it's favorable tax treatment, low workers' comp. costs, and the existence of an educated labor pool that are the highest drivers of entrepreneurship.
                 </p>
               </li>
             </ol>
